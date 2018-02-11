@@ -20,7 +20,7 @@ namespace MGJ
         //Pillar lPillar;
         //Pillar rPillar;
         //Target lTarget;
-        Target rTarget;
+        //Target rTarget;
 
         List<Food> foodList;
 

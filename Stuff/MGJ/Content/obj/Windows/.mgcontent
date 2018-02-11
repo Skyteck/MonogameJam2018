@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/Player.png</File>
+    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/Pillar.png</File>
+    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/Target.png</File>
+    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/Food.png</File>
+    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/RectTex.png</File>
+  </SourceFiles>
+</SourceFileCollection>

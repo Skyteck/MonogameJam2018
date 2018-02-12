@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/Player.png</SourceFile>
-  <SourceTime>2018-02-10T21:10:28.9377279-06:00</SourceTime>
-  <DestFile>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/bin/Windows/Art/Player.xnb</DestFile>
-  <DestTime>2018-02-11T00:03:19.4650772-06:00</DestTime>
+  <SourceFile>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/Art/Player.png</SourceFile>
+  <SourceTime>2018-02-11T00:23:37.5672778-06:00</SourceTime>
+  <DestFile>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/bin/Windows/Art/Player.xnb</DestFile>
+  <DestTime>2018-02-11T21:07:25.5929965-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T09:05:36-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

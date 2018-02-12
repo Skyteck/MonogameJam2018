@@ -23,7 +23,8 @@ namespace MGJ
         //Target rTarget;
 
         List<Food> foodList;
-
+        List<Switch> SwitchList;
+        List<Door> DoorList;
         Random ran;
 
         float foodTimer = 1.0f;
@@ -31,6 +32,9 @@ namespace MGJ
         Vector2 mouseClickPos = Vector2.Zero;
 
         Texture2D SelectTex;
+
+        bool SelectMode = false;
+        Switch SelectedSwitch;
 
         Rectangle SelectRect
         {
@@ -63,7 +67,7 @@ namespace MGJ
             }
         }
 
-        List<Rectangle> rectList;
+        List<SpriteRectangle> rectList;
 
         public Game1()
         {
@@ -99,8 +103,9 @@ namespace MGJ
             player._Position = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
 
             foodList = new List<Food>();
-            rectList = new List<Rectangle>();
-
+            rectList = new List<SpriteRectangle>();
+            SwitchList = new List<Switch>();
+            DoorList = new List<Door>();
             SelectTex = Content.Load<Texture2D>(@"Art/RectTex");
 
             
@@ -157,20 +162,56 @@ namespace MGJ
             player.Update(gameTime);
 
 
-            foreach(Rectangle rect in rectList)
+            foreach(SpriteRectangle rect in rectList)
             {
-                if(rect.Intersects(player._BoundingBox))
+                if(rect.myRect.Intersects(player._BoundingBox))
                 {
                     player._Position = currentPlayerPos;
                 }
             }
-            
 
-            //foodTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            foreach (Door rect in DoorList)
+            {
+                if (rect.myRect.Intersects(player._BoundingBox) && rect.open == false)
+                {
+                    player._Position = currentPlayerPos;
+                }
+            }
 
+            if(InputHelper.IsKeyPressed(Keys.Space))
+            {
+                foreach(Switch s in SwitchList)
+                {
+                    if(s._BoundingBox.Contains(InputHelper.MouseScreenPos))
+                    {
+                        SelectMode = true;
+                        SelectedSwitch = s;
+                        break;
+                    }
+                }
+            }
 
+            if(SelectMode == true && InputHelper.IsKeyDown(Keys.Space))
+            {
+                foreach(Door d in DoorList)
+                {
+                    if(d.myRect.Contains(InputHelper.MouseScreenPos))
+                    {
+                        SelectedSwitch.AddDoor(d);
+                        SelectMode = false;
+                    }
+                }
+            }
 
-            if(InputHelper.IsKeyPressed(Keys.G))
+            foreach(Switch s in SwitchList)
+            {
+                if(s._BoundingBox.Intersects(player._BoundingBox))
+                {
+                    s.ChangeDoors();
+                }
+            }
+
+            if (InputHelper.IsKeyPressed(Keys.G))
             {
                 CreateFood(true, InputHelper.MouseScreenPos);
                 foodTimer = 1.0f;
@@ -192,14 +233,14 @@ namespace MGJ
 
                         player._Scale.X += 0.05f;
                         player._Scale.Y += 0.05f;
-                        player.speed += 3f;
+                        //player.speed += 3f;
                     }
                     else
                     {
 
                         player._Scale.X -= 0.05f;
                         player._Scale.Y -= 0.05f;
-                        player.speed -= 3f;
+                        //player.speed -= 3f;
                     }
                     f.Deactivate();
 
@@ -209,37 +250,44 @@ namespace MGJ
             {
                 mouseClickPos = InputHelper.MouseScreenPos;
             }
-            if(InputHelper.LeftButtonHeld)
-            {
 
-            }
-            if(InputHelper.LeftButtonReleased)
+            if(InputHelper.LeftButtonReleased && InputHelper.IsKeyDown(Keys.L))
             {
-                Rectangle r = new Rectangle();
-                r = SelectRect;
+                Door d = new Door();
+                d.myRect = SelectRect;
+                d.LoadContent(@"Art/Door", Content);
+                DoorList.Add(d);
+                mouseClickPos = Vector2.Zero;
+            }
+            else if( InputHelper.LeftButtonReleased)
+            {
+                SpriteRectangle r = new SpriteRectangle();
+                r.myRect = SelectRect;
                 rectList.Add(r);
                 mouseClickPos = Vector2.Zero;
 
             }
+            
+            if(InputHelper.RightButtonClicked && InputHelper.IsKeyDown(Keys.LeftControl))
+            {
+                foreach(SpriteRectangle rect in rectList)
+                {
+                    if(rect.myRect.Contains(InputHelper.MouseScreenPos))
+                    {
+                        rect.Active = false;
+                    }
+                }
+            }
 
-                //rPillar.Update(gameTime);
-                //lPillar.Update(gameTime);
-                //lTarget.Update(gameTime);
-                //rTarget.Update(gameTime);
-                //if (InputHelper.IsKeyDown(Keys.Space))
-                //{
-                //    rPillar._Position = new Vector2(GraphicsDevice.Viewport.Width, -100);
-                //    lPillar._Position = new Vector2(0, -100);
-
-                //    lTarget._Position.X = lPillar._BoundingBox.Right;
-                //    lTarget._Position.Y = -100;
+            rectList.RemoveAll(x => x.Active == false);
 
 
-                //    rTarget._Position.X = rPillar._BoundingBox.Left;
-                //    rTarget._Position.Y = -100;
+            if (InputHelper.IsKeyPressed(Keys.H))
+            {
+                CreateSwitch();
+            }
 
-                //}
-                base.Update(gameTime);
+            base.Update(gameTime);
         }
 
         /// <summary>
@@ -251,47 +299,55 @@ namespace MGJ
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             // TODO: Add your drawing code here
-            player.Draw(spriteBatch);
 
             foreach(Food f in foodList)
             {
                 f.Draw(spriteBatch);
             }
-            //rPillar.Draw(spriteBatch);
-            //lPillar.Draw(spriteBatch);
-            //rTarget.Draw(spriteBatch);
-            //lTarget.Draw(spriteBatch);
+
 
             if(mouseClickPos!= Vector2.Zero)
             {
                 DrawSelectRect(spriteBatch);
             }
 
-            foreach(Rectangle rect in rectList)
+            foreach(SpriteRectangle rect in rectList)
             {
-                DrawRectangle(spriteBatch, rect);
+                DrawRectangle(spriteBatch, rect.myRect, SelectTex);
             }
 
+            foreach(Switch s in SwitchList)
+            {
+
+                s.Draw(spriteBatch);
+            }
+
+            foreach(Door d in DoorList.FindAll(x=>x.open == false))
+            {
+                DrawRectangle(spriteBatch, d.myRect, d._Texture);
+                d.Draw(spriteBatch);
+            }
+            player.Draw(spriteBatch);
             base.Draw(gameTime);
             spriteBatch.End();
         }
 
-        private void DrawRectangle(SpriteBatch sb, Rectangle rect)
+        private void DrawRectangle(SpriteBatch sb, Rectangle rect, Texture2D tex)
         {
             int border = 3;
 
             //Left Line
-            sb.Draw(SelectTex, new Rectangle(rect.X, rect.Y, rect.Width, rect.Height), Color.White);
+            sb.Draw(tex, new Rectangle(rect.X, rect.Y, rect.Width, rect.Height), Color.White);
             //sb.Draw(SelectTex, new Rectangle(rect.X, rect.Y, 1, rect.Height), Color.White);
 
             //top line
-            sb.Draw(SelectTex, new Rectangle(rect.X, rect.Y, rect.Width + border, border), Color.White);
+            sb.Draw(tex, new Rectangle(rect.X, rect.Y, rect.Width + border, border), Color.White);
 
             //right line
-            sb.Draw(SelectTex, new Rectangle(rect.X + rect.Width, rect.Y, border, rect.Height + border), Color.White);
+            sb.Draw(tex, new Rectangle(rect.X + rect.Width, rect.Y, border, rect.Height + border), Color.White);
 
             //bottom line
-            sb.Draw(SelectTex, new Rectangle(rect.X, rect.Y + rect.Height, rect.Width + border, border), Color.White);
+            sb.Draw(tex, new Rectangle(rect.X, rect.Y + rect.Height, rect.Width + border, border), Color.White);
         }
 
         private void DrawSelectRect(SpriteBatch sb)
@@ -334,6 +390,26 @@ namespace MGJ
                 f.Activate(newPos);
                 f.goodFood = good;
                 foodList.Add(f);
+            }
+
+        }
+
+        private void CreateSwitch()
+        {
+            Switch f;
+            f = SwitchList.Find(x => x._CurrentState == Sprite.SpriteState.kStateInActive);
+            //Vector2 newPos = new Vector2(ran.Next(20, 780), ran.Next(20, 460));
+            Vector2 newPos = InputHelper.MouseScreenPos;
+            if (f != null)
+            {
+                f.Activate(newPos);
+            }
+            else
+            {
+                f = new Switch();
+                f.LoadContent(@"Art/Switch", Content);
+                f.Activate(newPos);
+                SwitchList.Add(f);
             }
 
         }

@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace MGJ.GameObjects
 {
-    class SpriteRectangle : Sprite
+    class SpriteRectangle
     {
-        
+        public Rectangle myRect;
+        public bool Active = true;
+
+
     }
 }

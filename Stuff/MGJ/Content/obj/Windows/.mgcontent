@@ -4,10 +4,12 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/Player.png</File>
-    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/Pillar.png</File>
-    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/Target.png</File>
-    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/Food.png</File>
-    <File>D:/Gamedev/Monogame/CiG/CIG/MGJ/Content/Art/RectTex.png</File>
+    <File>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/Art/Player.png</File>
+    <File>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/Art/Pillar.png</File>
+    <File>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/Art/Target.png</File>
+    <File>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/Art/Food.png</File>
+    <File>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/Art/RectTex.png</File>
+    <File>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/Art/Switch.png</File>
+    <File>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/Art/Door.png</File>
   </SourceFiles>
 </SourceFileCollection>

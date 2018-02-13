@@ -9,29 +9,37 @@ namespace MGJ.GameObjects
 {
     class Switch : Sprite
     {
-        List<Door> doorList;
+        public Enums.SwitchColors currentColor = Enums.SwitchColors.kColorWhite;   
 
-        public Switch()
+        public void ChangeColor(Enums.SwitchColors color)
         {
-            doorList = new List<Door>();
-        }
-
-        protected override void UpdateActive(GameTime gt)
-        {
-
-            base.UpdateActive(gt);
-        }
-
-        public void AddDoor(Door d)
-        {
-            doorList.Add(d);
-        }
-
-        public void ChangeDoors()
-        {
-            foreach(Door d in doorList)
+            currentColor = color;
+            switch(color)
             {
-                d.Open();
+                case Enums.SwitchColors.kColorRed:
+                    _MyColor = Color.Red;
+                    break;
+                case Enums.SwitchColors.kColorOrange:
+                    _MyColor = Color.Orange;
+                    break;
+                case Enums.SwitchColors.kColorYellow:
+                    _MyColor = Color.Yellow;
+                    break;
+                case Enums.SwitchColors.kColorGreen:
+                    _MyColor = Color.Green;
+                    break;
+                case Enums.SwitchColors.kColorBlue:
+                    _MyColor = Color.Blue;
+                    break;
+                case Enums.SwitchColors.kColorIndigo:
+                    _MyColor = new Color(136, 96, 255, 255);
+                    break;
+                case Enums.SwitchColors.kColorViolet:
+                    _MyColor = new Color(178, 96, 255, 255);
+                    break;
+                default:
+                    _MyColor = Color.White;
+                    break;
             }
         }
     }

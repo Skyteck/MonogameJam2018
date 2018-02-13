@@ -12,6 +12,8 @@ namespace MGJ.GameObjects
     {
         public float speed = 100f;
 
+        public Enums.SwitchColors currentColor = Enums.SwitchColors.kColorGreen;
+
         protected override void UpdateActive(GameTime gt)
         {
             ProcessInput(gt);
@@ -71,6 +73,78 @@ namespace MGJ.GameObjects
             if (InputHelper.IsKeyDown(Keys.E))
             {
                 this._Scale = Vector2.One;
+            }
+        }
+
+        public void ChangeSize(int i)
+        {
+            if(i > 0)
+            {
+                this._Scale.X += 0.25f;
+                if(this._Scale.X >= 1.75f)
+                {
+                    this._Scale.X = 1.75f;
+                }
+                this._Scale.Y = this._Scale.X;
+                if((int)this.currentColor < (int)Enums.SwitchColors.kColorViolet)
+                {
+
+                    this.ChangeColor(this.currentColor + 1);
+                }
+
+            }
+            else if(i < 0)
+            {
+                this._Scale.X -= 0.25f;
+                if (this._Scale.X <= 0.25f)
+                {
+                    this._Scale.X = 0.25f;
+                }
+
+
+                if ((int)this.currentColor > (int)Enums.SwitchColors.kColorRed)
+                {
+                    
+                    this.ChangeColor(this.currentColor - 1);
+                }
+
+            }
+            this._Scale.Y = this._Scale.X;
+            
+
+
+        }
+
+
+        public void ChangeColor(Enums.SwitchColors color)
+        {
+            currentColor = color;
+            switch (color)
+            {
+                case Enums.SwitchColors.kColorRed:
+                    _MyColor = Color.Red;
+                    break;
+                case Enums.SwitchColors.kColorOrange:
+                    _MyColor = Color.Orange;
+                    break;
+                case Enums.SwitchColors.kColorYellow:
+                    _MyColor = Color.Yellow;
+                    break;
+                case Enums.SwitchColors.kColorGreen:
+                    _MyColor = Color.Green;
+                    break;
+                case Enums.SwitchColors.kColorBlue:
+                    _MyColor = Color.Blue;
+                    break;
+                case Enums.SwitchColors.kColorIndigo:
+                    _MyColor = new Color(136, 96, 255, 255);
+                    break;
+                case Enums.SwitchColors.kColorViolet:
+                    _MyColor = new Color(178, 96, 255, 255);
+                    break;
+                default:
+                    _MyColor = Color.White;
+                    break;
             }
         }
 

@@ -11,6 +11,7 @@ namespace MGJ.GameObjects
     {
         public Rectangle myRect;
         public bool Active = true;
+        public Vector2 Position;
 
 
     }

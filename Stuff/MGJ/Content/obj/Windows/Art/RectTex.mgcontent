@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/Art/RectTex.png</SourceFile>
-  <SourceTime>2018-02-11T00:23:37.5712813-06:00</SourceTime>
+  <SourceTime>2018-02-12T21:09:10.7801509-06:00</SourceTime>
   <DestFile>D:/Gamedev/Monogame/MonogameJam2018/MonogameJam2018/Stuff/MGJ/Content/bin/Windows/Art/RectTex.xnb</DestFile>
-  <DestTime>2018-02-11T21:07:25.633036-06:00</DestTime>
+  <DestTime>2018-02-12T21:55:09.9786809-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T09:05:36-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

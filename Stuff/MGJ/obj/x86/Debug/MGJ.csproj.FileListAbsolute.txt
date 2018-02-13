@@ -79,8 +79,13 @@ D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\De
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.XInput.xml
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
-D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\obj\x86\Debug\MGJ.csprojResolveAssemblyReference.cache
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\obj\x86\Debug\MGJ.exe
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\obj\x86\Debug\MGJ.pdb
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Switch.xnb
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Door.xnb
+D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Blueberry.xnb
+D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Exit.xnb
+D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Strawberry.xnb
+D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Newtonsoft.Json.dll
+D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Newtonsoft.Json.xml
+D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\obj\x86\Debug\MGJ.csprojResolveAssemblyReference.cache

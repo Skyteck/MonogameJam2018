@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using MGJ.GameObjects;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace MGJ
 {
@@ -33,8 +34,12 @@ namespace MGJ
 
         Texture2D SelectTex;
 
-        bool SelectMode = false;
+        bool SwitchHit = false;
         Switch SelectedSwitch;
+
+        bool levelSaved = false;
+
+        List<Level> levelsList;
 
         Rectangle SelectRect
         {
@@ -74,6 +79,10 @@ namespace MGJ
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
+
+            graphics.PreferredBackBufferWidth = 1280;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = 720;   // set this value to the desired height of your window
+
         }
 
         /// <summary>
@@ -106,35 +115,16 @@ namespace MGJ
             rectList = new List<SpriteRectangle>();
             SwitchList = new List<Switch>();
             DoorList = new List<Door>();
+            levelsList = new List<Level>();
+
             SelectTex = Content.Load<Texture2D>(@"Art/RectTex");
 
+            //LOAD LEVEL JSON HERE
             
 
-
-            //rPillar = new Pillar();
-            //rPillar.LoadContent(@"Art/Pillar", Content);
-            //rPillar._Position.X = GraphicsDevice.Viewport.Width;
-            //rPillar._Position.Y = -100;
-            //rPillar._Scale.X = 6.0f;
-
-            //lPillar = new Pillar();
-            //lPillar.LoadContent(@"Art/Pillar", Content);
-            //lPillar._Position.X = 0;
-            //lPillar._Position.Y = -100;
-            //lPillar._Scale.X = 6.0f;
-
-            //rTarget = new Target();
-            //rTarget.LoadContent(@"Art/Target", Content);
-            //rTarget._Position.X = rPillar._BoundingBox.Left;
-            //rTarget._Position.Y = -100;
-
-            //lTarget = new Target();
-            //lTarget.LoadContent(@"Art/Target", Content);
-            //lTarget._Position.X = lPillar._BoundingBox.Right;
-            //lTarget._Position.Y = -100;
-
-
             // TODO: use this.Content to load your game content here
+
+            player.ChangeColor(Enums.SwitchColors.kColorGreen);
         }
 
         /// <summary>
@@ -178,49 +168,42 @@ namespace MGJ
                 }
             }
 
-            if(InputHelper.IsKeyPressed(Keys.Space))
-            {
-                foreach(Switch s in SwitchList)
-                {
-                    if(s._BoundingBox.Contains(InputHelper.MouseScreenPos))
-                    {
-                        SelectMode = true;
-                        SelectedSwitch = s;
-                        break;
-                    }
-                }
-            }
+            CheckColorInput();
 
-            if(SelectMode == true && InputHelper.IsKeyDown(Keys.Space))
-            {
-                foreach(Door d in DoorList)
-                {
-                    if(d.myRect.Contains(InputHelper.MouseScreenPos))
-                    {
-                        SelectedSwitch.AddDoor(d);
-                        SelectMode = false;
-                    }
-                }
-            }
-
+            bool switchHitThisFrame = false;
             foreach(Switch s in SwitchList)
             {
-                if(s._BoundingBox.Intersects(player._BoundingBox))
+                if(s._BoundingBox.Intersects(player._BoundingBox) && s.currentColor == player.currentColor)
                 {
-                    s.ChangeDoors();
+                    switchHitThisFrame = true;
+                    if(SwitchHit == false)
+                    {
+                        foreach(Door d in DoorList.FindAll(x=>x.currentColor == s.currentColor))
+                        {
+                            d.Open();
+                        }
+                    }
+
                 }
             }
+            if(switchHitThisFrame)
+            {
+                SwitchHit = true;
+            }
+            else
+            {
+                SwitchHit = false;
+            }
+
 
             if (InputHelper.IsKeyPressed(Keys.G))
             {
                 CreateFood(true, InputHelper.MouseScreenPos);
-                foodTimer = 1.0f;
             }
 
             if (InputHelper.IsKeyPressed(Keys.B))
             {
                 CreateFood(false, InputHelper.MouseScreenPos);
-                foodTimer = 1.0f;
             }
 
             foreach (Food f in foodList.FindAll(x=>x._CurrentState == Sprite.SpriteState.kStateActive))
@@ -230,17 +213,11 @@ namespace MGJ
                 {
                     if(f.goodFood)
                     {
-
-                        player._Scale.X += 0.05f;
-                        player._Scale.Y += 0.05f;
-                        //player.speed += 3f;
+                        player.ChangeSize(1);
                     }
                     else
                     {
-
-                        player._Scale.X -= 0.05f;
-                        player._Scale.Y -= 0.05f;
-                        //player.speed -= 3f;
+                        player.ChangeSize(-1);
                     }
                     f.Deactivate();
 
@@ -264,6 +241,7 @@ namespace MGJ
                 SpriteRectangle r = new SpriteRectangle();
                 r.myRect = SelectRect;
                 rectList.Add(r);
+                r.Position = SelectRect.Location.ToVector2();
                 mouseClickPos = Vector2.Zero;
 
             }
@@ -287,7 +265,94 @@ namespace MGJ
                 CreateSwitch();
             }
 
+            if(InputHelper.IsKeyPressed(Keys.Enter))
+            {
+                SaveLevel();
+            }
+
+
             base.Update(gameTime);
+        }
+
+        private void SaveLevel()
+        {
+            Level nl = new Level();
+            nl.LevelName = "test1";
+            nl.SaveLevel(DoorList, SwitchList, foodList, rectList, new Vector2(0, 0), new Vector2(720, 500));
+            levelSaved = true;
+
+            string cd = System.IO.Directory.GetCurrentDirectory();
+            System.IO.Directory.SetCurrentDirectory(cd+@"\Content\JSON");
+            cd = System.IO.Directory.GetCurrentDirectory();
+            string path = cd + @"LevelList.json";
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(path))
+            {
+                string json = JsonConvert.SerializeObject(nl, Formatting.Indented);
+                file.WriteLine(json);
+            }
+
+        }
+
+        public void CheckColorInput()
+        {
+            Enums.SwitchColors newColor = Enums.SwitchColors.kColorWhite;
+            bool keyHit = false;
+
+            if (InputHelper.IsKeyPressed(Keys.D1))
+            {
+                keyHit = true;
+                newColor = Enums.SwitchColors.kColorRed;
+            }
+            else if (InputHelper.IsKeyPressed(Keys.D2))
+            {
+                keyHit = true;
+                newColor = Enums.SwitchColors.kColorOrange;
+            }
+            else if (InputHelper.IsKeyPressed(Keys.D3))
+            {
+                keyHit = true;
+                newColor = Enums.SwitchColors.kColorYellow;
+            }
+            else if (InputHelper.IsKeyPressed(Keys.D4))
+            {
+                keyHit = true;
+                newColor = Enums.SwitchColors.kColorGreen;
+            }
+            else if (InputHelper.IsKeyPressed(Keys.D5))
+            {
+                keyHit = true;
+                newColor = Enums.SwitchColors.kColorBlue;
+            }
+            else if (InputHelper.IsKeyPressed(Keys.D6))
+            {
+                keyHit = true;
+                newColor = Enums.SwitchColors.kColorIndigo;
+            }
+            else if (InputHelper.IsKeyPressed(Keys.D7))
+            {
+                keyHit = true;
+                newColor = Enums.SwitchColors.kColorViolet;
+            }
+
+            if(keyHit)
+            {
+                foreach (Switch s in SwitchList)
+                {
+                    if (s._BoundingBox.Contains(InputHelper.MouseScreenPos))
+                    {
+                        s.ChangeColor(newColor);
+                    }
+                }
+
+                foreach (Door d in DoorList)
+                {
+                    if (d.myRect.Contains(InputHelper.MouseScreenPos))
+                    {
+                        d.ChangeColor(newColor);
+                    }
+                }
+            }
+
         }
 
         /// <summary>
@@ -313,7 +378,7 @@ namespace MGJ
 
             foreach(SpriteRectangle rect in rectList)
             {
-                DrawRectangle(spriteBatch, rect.myRect, SelectTex);
+                DrawRectangle(spriteBatch, rect.myRect, SelectTex, Color.Pink);
             }
 
             foreach(Switch s in SwitchList)
@@ -324,7 +389,7 @@ namespace MGJ
 
             foreach(Door d in DoorList.FindAll(x=>x.open == false))
             {
-                DrawRectangle(spriteBatch, d.myRect, d._Texture);
+                DrawRectangle(spriteBatch, d.myRect, d._Texture, d._MyColor);
                 d.Draw(spriteBatch);
             }
             player.Draw(spriteBatch);
@@ -332,22 +397,22 @@ namespace MGJ
             spriteBatch.End();
         }
 
-        private void DrawRectangle(SpriteBatch sb, Rectangle rect, Texture2D tex)
+        private void DrawRectangle(SpriteBatch sb, Rectangle rect, Texture2D tex, Color col)
         {
             int border = 3;
 
             //Left Line
-            sb.Draw(tex, new Rectangle(rect.X, rect.Y, rect.Width, rect.Height), Color.White);
+            sb.Draw(tex, new Rectangle(rect.X, rect.Y, rect.Width, rect.Height), col);
             //sb.Draw(SelectTex, new Rectangle(rect.X, rect.Y, 1, rect.Height), Color.White);
 
             //top line
-            sb.Draw(tex, new Rectangle(rect.X, rect.Y, rect.Width + border, border), Color.White);
+            sb.Draw(tex, new Rectangle(rect.X, rect.Y, rect.Width + border, border), col);
 
             //right line
-            sb.Draw(tex, new Rectangle(rect.X + rect.Width, rect.Y, border, rect.Height + border), Color.White);
+            sb.Draw(tex, new Rectangle(rect.X + rect.Width, rect.Y, border, rect.Height + border), col);
 
             //bottom line
-            sb.Draw(tex, new Rectangle(rect.X, rect.Y + rect.Height, rect.Width + border, border), Color.White);
+            sb.Draw(tex, new Rectangle(rect.X, rect.Y + rect.Height, rect.Width + border, border), col);
         }
 
         private void DrawSelectRect(SpriteBatch sb)
@@ -390,6 +455,17 @@ namespace MGJ
                 f.Activate(newPos);
                 f.goodFood = good;
                 foodList.Add(f);
+            }
+
+
+            if (good == true)
+            {
+                f.LoadContent(@"Art/Blueberry", Content);
+            }
+            else
+            {
+                f.LoadContent(@"Art/Strawberry", Content);
+
             }
 
         }

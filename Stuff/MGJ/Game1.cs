@@ -40,7 +40,7 @@ namespace MGJ
         bool levelSaved = false;
 
         List<Level> levelsList;
-
+        ExitPoint currentExit = null;
         Rectangle SelectRect
         {
             get
@@ -120,11 +120,57 @@ namespace MGJ
             SelectTex = Content.Load<Texture2D>(@"Art/RectTex");
 
             //LOAD LEVEL JSON HERE
-            
+
 
             // TODO: use this.Content to load your game content here
 
+
+            string cd = System.IO.Directory.GetCurrentDirectory();
+            System.IO.Directory.SetCurrentDirectory(cd + @"..\..\..\..\..\Content\JSON");
+            cd = System.IO.Directory.GetCurrentDirectory();
+            string path = cd + @"\LevelList.json";
+
+            var file = System.IO.File.ReadAllText(path);
+            levelsList = JsonConvert.DeserializeObject<List<Level>>(file);
+
+            if(levelsList != null && levelsList.Count > 0)
+            {
+                LoadLevel(0);
+
+            }
+
             player.ChangeColor(Enums.SwitchColors.kColorGreen);
+        }
+
+        private void LoadLevel(int v)
+        {
+            Level nl = levelsList[v];
+            player._Position = nl.SpawnPoint;
+            currentExit = new ExitPoint();
+            currentExit._Position = nl.ExitPoint;
+            currentExit.LoadContent(@"Art/Exit", Content);
+
+            foreach(DoorInfo di in nl.DoorList)
+            {
+                Door nd = new Door();
+                nd.myRect = new Rectangle((int)di.pos.X, (int)di.pos.Y, di.width, di.height);
+                nd.ChangeColor(di.color);
+                nd.LoadContent(@"Art/Door", Content);
+                DoorList.Add(nd);
+            }
+
+
+            foreach (WallInfo di in nl.WallList)
+            {
+                SpriteRectangle nd = new SpriteRectangle();
+                nd.myRect = new Rectangle((int)di.pos.X, (int)di.pos.Y, di.width, di.height);
+                //nd.currentColor = di.color;
+                //nd.LoadContent(@"Art/Door", Content);
+                rectList.Add(nd);
+            }
+
+
+
         }
 
         /// <summary>
@@ -270,26 +316,66 @@ namespace MGJ
                 SaveLevel();
             }
 
+            if(InputHelper.IsKeyPressed(Keys.R))
+            {
+                currentExit = new ExitPoint();
+                currentExit._Position = InputHelper.MouseScreenPos;
+                currentExit.LoadContent(@"Art/Exit", Content);
+                
+            }
+
+            if(currentExit != null)
+            {
+                if(player._BoundingBox.Intersects(currentExit._BoundingBox))
+                {
+                    //LoadNextLevel();
+                }
+            }
 
             base.Update(gameTime);
         }
 
         private void SaveLevel()
         {
-            Level nl = new Level();
-            nl.LevelName = "test1";
-            nl.SaveLevel(DoorList, SwitchList, foodList, rectList, new Vector2(0, 0), new Vector2(720, 500));
-            levelSaved = true;
 
-            string cd = System.IO.Directory.GetCurrentDirectory();
-            System.IO.Directory.SetCurrentDirectory(cd+@"\Content\JSON");
-            cd = System.IO.Directory.GetCurrentDirectory();
-            string path = cd + @"LevelList.json";
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(path))
+            Level nl = new Level();
+            if(levelsList == null)
             {
-                string json = JsonConvert.SerializeObject(nl, Formatting.Indented);
-                file.WriteLine(json);
+                levelsList = new List<Level>();
             }
+            nl.LevelName = levelsList.Count.ToString();
+            string path;
+            try
+            {
+
+                nl.SaveLevel(DoorList, SwitchList, foodList, rectList, player._Position, currentExit._Position);
+                levelSaved = true;
+
+                levelsList.Add(nl);
+
+                string cd = System.IO.Directory.GetCurrentDirectory();
+                System.IO.Directory.SetCurrentDirectory(cd + @"..\..\..\Content\JSON");
+                cd = System.IO.Directory.GetCurrentDirectory();
+                path = cd + @"\LevelList.json";
+
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(path))
+                {
+                    string json = JsonConvert.SerializeObject(levelsList, Formatting.Indented);
+                    file.WriteLine(json);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Saving.");
+                return;
+            }
+
+            DoorList.Clear();
+            SwitchList.Clear();
+            foodList.Clear();
+            player._Position = new Vector2(0, 0);
+            currentExit = null;
+            rectList.Clear();
 
         }
 
@@ -393,6 +479,11 @@ namespace MGJ
                 d.Draw(spriteBatch);
             }
             player.Draw(spriteBatch);
+
+            if(currentExit != null)
+            {
+                currentExit.Draw(spriteBatch);
+            }
             base.Draw(gameTime);
             spriteBatch.End();
         }

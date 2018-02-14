@@ -1,0 +1,63 @@
+[
+  {
+    "DoorList": [
+      {
+        "pos": "964, 161",
+        "color": 5,
+        "width": 115,
+        "height": 93
+      }
+    ],
+    "SwitchList": [],
+    "FoodList": [],
+    "WallList": [
+      {
+        "rect": {
+          "X": 293,
+          "Y": 149,
+          "Width": 79,
+          "Height": 78
+        },
+        "pos": "293, 149",
+        "width": 79,
+        "height": 78
+      },
+      {
+        "rect": {
+          "X": 215,
+          "Y": 377,
+          "Width": 168,
+          "Height": 164
+        },
+        "pos": "215, 377",
+        "width": 168,
+        "height": 164
+      },
+      {
+        "rect": {
+          "X": 674,
+          "Y": 541,
+          "Width": 255,
+          "Height": 68
+        },
+        "pos": "674, 541",
+        "width": 255,
+        "height": 68
+      },
+      {
+        "rect": {
+          "X": 947,
+          "Y": 426,
+          "Width": 192,
+          "Height": 114
+        },
+        "pos": "947, 426",
+        "width": 192,
+        "height": 114
+      }
+    ],
+    "SpawnPoint": "640, 360",
+    "ExitPoint": "842, 214",
+    "LevelName": "0"
+  }
+]

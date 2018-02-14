@@ -89,3 +89,38 @@ D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\De
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Newtonsoft.Json.dll
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Newtonsoft.Json.xml
 D:\Gamedev\Monogame\MonogameJam2018\MonogameJam2018\Stuff\MGJ\obj\x86\Debug\MGJ.csprojResolveAssemblyReference.cache
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Blueberry.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Door.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Exit.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Food.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Pillar.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Player.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\RectTex.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Strawberry.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Switch.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Content\Art\Target.xnb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\MGJ.exe
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\MGJ.pdb
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Newtonsoft.Json.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\Newtonsoft.Json.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\obj\x86\Debug\MGJ.csprojResolveAssemblyReference.cache
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\obj\x86\Debug\MGJ.exe
+C:\Users\Richard.Ellzy\Desktop\New folder\MonogameJam2018\Stuff\MGJ\obj\x86\Debug\MGJ.pdb

@@ -33,6 +33,8 @@ namespace MGJ
                 DoorInfo di = new DoorInfo();
                 di.pos = d.myRect.Location.ToVector2();
                 di.color = d.currentColor;
+                di.height = d.myRect.Height;
+                di.width = d.myRect.Width;
                 DoorList.Add(di);
             }
 
@@ -57,6 +59,8 @@ namespace MGJ
                 WallInfo wi = new WallInfo();
                 wi.rect = sr.myRect;
                 wi.pos = sr.Position;
+                wi.height = sr.myRect.Height;
+                wi.width = sr.myRect.Width;
                 WallList.Add(wi);
             }
 
@@ -74,6 +78,8 @@ namespace MGJ
     {
         public Vector2 pos;
         public Enums.SwitchColors color;
+        public int width;
+        public int height;
     }
 
     class SwitchInfo
@@ -92,5 +98,7 @@ namespace MGJ
     {
         public Rectangle rect;
         public Vector2 pos;
+        public int width;
+        public int height;
     }
 }

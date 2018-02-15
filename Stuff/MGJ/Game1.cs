@@ -41,6 +41,9 @@ namespace MGJ
 
         List<Level> levelsList;
         ExitPoint currentExit = null;
+        Level LoadedLevel;
+
+        int currentLevel = 0;
         Rectangle SelectRect
         {
             get
@@ -135,7 +138,7 @@ namespace MGJ
 
             if(levelsList != null && levelsList.Count > 0)
             {
-                LoadLevel(0);
+                LoadLevel(currentLevel);
 
             }
 
@@ -144,6 +147,15 @@ namespace MGJ
 
         private void LoadLevel(int v)
         {
+
+            DoorList.Clear();
+            SwitchList.Clear();
+            foodList.Clear();
+            player._Position = new Vector2(0, 0);
+            currentExit = null;
+            rectList.Clear();
+
+
             Level nl = levelsList[v];
             player._Position = nl.SpawnPoint;
             currentExit = new ExitPoint();
@@ -169,7 +181,32 @@ namespace MGJ
                 rectList.Add(nd);
             }
 
+            foreach(SwitchInfo si in nl.SwitchList)
+            {
+                Switch ns = new Switch();
+                ns.LoadContent(@"Art/Switch", Content);
+                
+                ns.ChangeColor(si.color);
+                ns._Position = si.pos;
+                SwitchList.Add(ns);
+            }
 
+            foreach(FoodInfo fi in nl.FoodList)
+            {
+                Food nf = new Food();
+                if(fi.goodFood)
+                {
+                    nf.LoadContent(@"Art/Blueberry", Content);
+
+                }
+                else
+                {
+                    nf.LoadContent(@"Art/Strawberry", Content);
+
+                }
+                nf._Position = fi.pos;
+                foodList.Add(nf);
+            }
 
         }
 
@@ -328,7 +365,7 @@ namespace MGJ
             {
                 if(player._BoundingBox.Intersects(currentExit._BoundingBox))
                 {
-                    //LoadNextLevel();
+                    LoadLevel(++currentLevel);
                 }
             }
 

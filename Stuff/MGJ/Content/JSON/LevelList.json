@@ -2,62 +2,162 @@
   {
     "DoorList": [
       {
-        "pos": "964, 161",
-        "color": 5,
-        "width": 115,
-        "height": 93
+        "pos": "99, 186",
+        "color": 1,
+        "width": 62,
+        "height": 69
       }
     ],
+    "SwitchList": [
+      {
+        "pos": "336, 371",
+        "color": 5
+      }
+    ],
+    "FoodList": [
+      {
+        "pos": "186, 512",
+        "goodFood": true
+      },
+      {
+        "pos": "246, 583",
+        "goodFood": true
+      },
+      {
+        "pos": "416, 593",
+        "goodFood": true
+      },
+      {
+        "pos": "628, 602",
+        "goodFood": true
+      },
+      {
+        "pos": "964, 592",
+        "goodFood": false
+      },
+      {
+        "pos": "1018, 444",
+        "goodFood": false
+      },
+      {
+        "pos": "1039, 322",
+        "goodFood": false
+      },
+      {
+        "pos": "936, 196",
+        "goodFood": false
+      },
+      {
+        "pos": "815, 97",
+        "goodFood": false
+      }
+    ],
+    "WallList": [
+      {
+        "rect": {
+          "X": 227,
+          "Y": 79,
+          "Width": 74,
+          "Height": 65
+        },
+        "pos": "227, 79",
+        "width": 74,
+        "height": 65
+      }
+    ],
+    "SpawnPoint": "640, 360",
+    "ExitPoint": "645, 162",
+    "LevelName": "0"
+  },
+  {
+    "DoorList": [
+      {
+        "pos": "99, 186",
+        "color": 1,
+        "width": 62,
+        "height": 69
+      }
+    ],
+    "SwitchList": [
+      {
+        "pos": "336, 371",
+        "color": 5
+      }
+    ],
+    "FoodList": [
+      {
+        "pos": "186, 512",
+        "goodFood": true
+      },
+      {
+        "pos": "246, 583",
+        "goodFood": true
+      },
+      {
+        "pos": "416, 593",
+        "goodFood": true
+      },
+      {
+        "pos": "628, 602",
+        "goodFood": true
+      },
+      {
+        "pos": "964, 592",
+        "goodFood": true
+      },
+      {
+        "pos": "1018, 444",
+        "goodFood": true
+      },
+      {
+        "pos": "1039, 322",
+        "goodFood": true
+      },
+      {
+        "pos": "936, 196",
+        "goodFood": true
+      },
+      {
+        "pos": "815, 97",
+        "goodFood": true
+      }
+    ],
+    "WallList": [
+      {
+        "rect": {
+          "X": 227,
+          "Y": 79,
+          "Width": 74,
+          "Height": 65
+        },
+        "pos": "0, 0",
+        "width": 74,
+        "height": 65
+      }
+    ],
+    "SpawnPoint": "640, 360",
+    "ExitPoint": "645, 162",
+    "LevelName": "1"
+  },
+  {
+    "DoorList": [],
     "SwitchList": [],
     "FoodList": [],
     "WallList": [
       {
         "rect": {
-          "X": 293,
-          "Y": 149,
-          "Width": 79,
-          "Height": 78
+          "X": 758,
+          "Y": 203,
+          "Width": 189,
+          "Height": 115
         },
-        "pos": "293, 149",
-        "width": 79,
-        "height": 78
-      },
-      {
-        "rect": {
-          "X": 215,
-          "Y": 377,
-          "Width": 168,
-          "Height": 164
-        },
-        "pos": "215, 377",
-        "width": 168,
-        "height": 164
-      },
-      {
-        "rect": {
-          "X": 674,
-          "Y": 541,
-          "Width": 255,
-          "Height": 68
-        },
-        "pos": "674, 541",
-        "width": 255,
-        "height": 68
-      },
-      {
-        "rect": {
-          "X": 947,
-          "Y": 426,
-          "Width": 192,
-          "Height": 114
-        },
-        "pos": "947, 426",
-        "width": 192,
-        "height": 114
+        "pos": "758, 203",
+        "width": 189,
+        "height": 115
       }
     ],
-    "SpawnPoint": "640, 360",
-    "ExitPoint": "842, 214",
-    "LevelName": "0"
+    "SpawnPoint": "100.000267, 176.66716",
+    "ExitPoint": "527, 186",
+    "LevelName": "2"
   }
 ]

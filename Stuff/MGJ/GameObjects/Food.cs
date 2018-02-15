@@ -11,18 +11,5 @@ namespace MGJ.GameObjects
     class Food : Sprite
     {
         public bool goodFood = true;
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if(goodFood)
-            {
-                _MyColor = Color.White;
-            }
-            else
-            {
-                _MyColor = Color.Red;
-            }
-            base.Draw(spriteBatch);
-        }
     }
 }

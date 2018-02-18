@@ -85,7 +85,7 @@ namespace MGJ
 
             graphics.PreferredBackBufferWidth = 1280;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = 720;   // set this value to the desired height of your window
-
+            this.Window.Title = "ROYGBIV";
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace MGJ
 
 
             string cd = System.IO.Directory.GetCurrentDirectory();
-            System.IO.Directory.SetCurrentDirectory(cd + @"..\..\..\..\..\Content\JSON");
+            System.IO.Directory.SetCurrentDirectory(cd + @"\Content\JSON");
             cd = System.IO.Directory.GetCurrentDirectory();
             string path = cd + @"\LevelList.json";
 
@@ -151,13 +151,13 @@ namespace MGJ
             DoorList.Clear();
             SwitchList.Clear();
             foodList.Clear();
-            player._Position = new Vector2(0, 0);
             currentExit = null;
             rectList.Clear();
-
+            //v = 5;
 
             Level nl = levelsList[v];
             player._Position = nl.SpawnPoint;
+            player.SetPlayerSize(4);
             currentExit = new ExitPoint();
             currentExit._Position = nl.ExitPoint;
             currentExit.LoadContent(@"Art/Exit", Content);
@@ -193,19 +193,7 @@ namespace MGJ
 
             foreach(FoodInfo fi in nl.FoodList)
             {
-                Food nf = new Food();
-                if(fi.goodFood)
-                {
-                    nf.LoadContent(@"Art/Blueberry", Content);
-
-                }
-                else
-                {
-                    nf.LoadContent(@"Art/Strawberry", Content);
-
-                }
-                nf._Position = fi.pos;
-                foodList.Add(nf);
+                CreateFood(fi.goodFood, fi.pos);
             }
 
         }
@@ -226,7 +214,7 @@ namespace MGJ
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 Exit();
             InputHelper.Update();
             // TODO: Add your update logic here
@@ -234,6 +222,10 @@ namespace MGJ
             Vector2 currentPlayerPos = player._Position;
             player.Update(gameTime);
 
+            //if(InputHelper.IsKeyPressed(Keys.Escape))
+            //{
+            //    ClearLevel();
+            //}
 
             foreach(SpriteRectangle rect in rectList)
             {
@@ -251,7 +243,7 @@ namespace MGJ
                 }
             }
 
-            CheckColorInput();
+            //CheckColorInput();
 
             bool switchHitThisFrame = false;
             foreach(Switch s in SwitchList)
@@ -279,15 +271,15 @@ namespace MGJ
             }
 
 
-            if (InputHelper.IsKeyPressed(Keys.G))
-            {
-                CreateFood(true, InputHelper.MouseScreenPos);
-            }
+            //if (InputHelper.IsKeyPressed(Keys.G))
+            //{
+            //    CreateFood(true, InputHelper.MouseScreenPos);
+            //}
 
-            if (InputHelper.IsKeyPressed(Keys.B))
-            {
-                CreateFood(false, InputHelper.MouseScreenPos);
-            }
+            //if (InputHelper.IsKeyPressed(Keys.B))
+            //{
+            //    CreateFood(false, InputHelper.MouseScreenPos);
+            //}
 
             foreach (Food f in foodList.FindAll(x=>x._CurrentState == Sprite.SpriteState.kStateActive))
             {
@@ -306,60 +298,60 @@ namespace MGJ
 
                 }
             }
-            if(InputHelper.LeftButtonClicked)
-            {
-                mouseClickPos = InputHelper.MouseScreenPos;
-            }
+            //if(InputHelper.LeftButtonClicked)
+            //{
+            //    mouseClickPos = InputHelper.MouseScreenPos;
+            //}
 
-            if(InputHelper.LeftButtonReleased && InputHelper.IsKeyDown(Keys.L))
-            {
-                Door d = new Door();
-                d.myRect = SelectRect;
-                d.LoadContent(@"Art/Door", Content);
-                DoorList.Add(d);
-                mouseClickPos = Vector2.Zero;
-            }
-            else if( InputHelper.LeftButtonReleased)
-            {
-                SpriteRectangle r = new SpriteRectangle();
-                r.myRect = SelectRect;
-                rectList.Add(r);
-                r.Position = SelectRect.Location.ToVector2();
-                mouseClickPos = Vector2.Zero;
+            //if(InputHelper.LeftButtonReleased && InputHelper.IsKeyDown(Keys.L))
+            //{
+            //    Door d = new Door();
+            //    d.myRect = SelectRect;
+            //    d.LoadContent(@"Art/Door", Content);
+            //    DoorList.Add(d);
+            //    mouseClickPos = Vector2.Zero;
+            //}
+            //else if( InputHelper.LeftButtonReleased)
+            //{
+            //    SpriteRectangle r = new SpriteRectangle();
+            //    r.myRect = SelectRect;
+            //    rectList.Add(r);
+            //    r.Position = SelectRect.Location.ToVector2();
+            //    mouseClickPos = Vector2.Zero;
 
-            }
+            //}
             
-            if(InputHelper.RightButtonClicked && InputHelper.IsKeyDown(Keys.LeftControl))
-            {
-                foreach(SpriteRectangle rect in rectList)
-                {
-                    if(rect.myRect.Contains(InputHelper.MouseScreenPos))
-                    {
-                        rect.Active = false;
-                    }
-                }
-            }
+            //if(InputHelper.RightButtonClicked && InputHelper.IsKeyDown(Keys.LeftControl))
+            //{
+            //    foreach(SpriteRectangle rect in rectList)
+            //    {
+            //        if(rect.myRect.Contains(InputHelper.MouseScreenPos))
+            //        {
+            //            rect.Active = false;
+            //        }
+            //    }
+            //}
 
-            rectList.RemoveAll(x => x.Active == false);
+            //rectList.RemoveAll(x => x.Active == false);
 
 
-            if (InputHelper.IsKeyPressed(Keys.H))
-            {
-                CreateSwitch();
-            }
+            //if (InputHelper.IsKeyPressed(Keys.H))
+            //{
+            //    CreateSwitch();
+            //}
 
-            if(InputHelper.IsKeyPressed(Keys.Enter))
-            {
-                SaveLevel();
-            }
+            //if(InputHelper.IsKeyPressed(Keys.Enter))
+            //{
+            //    SaveLevel();
+            //}
 
-            if(InputHelper.IsKeyPressed(Keys.R))
-            {
-                currentExit = new ExitPoint();
-                currentExit._Position = InputHelper.MouseScreenPos;
-                currentExit.LoadContent(@"Art/Exit", Content);
+            //if(InputHelper.IsKeyPressed(Keys.R))
+            //{
+            //    currentExit = new ExitPoint();
+            //    currentExit._Position = InputHelper.MouseScreenPos;
+            //    currentExit.LoadContent(@"Art/Exit", Content);
                 
-            }
+            //}
 
             if(currentExit != null)
             {
@@ -369,7 +361,29 @@ namespace MGJ
                 }
             }
 
+            //if(InputHelper.IsKeyDown(Keys.LeftControl) && InputHelper.IsKeyDown(Keys.Enter))
+            //{
+            //    List<Level> newLevelList = new List<Level>();
+            //    for(int i = 0; i < levelsList.Count; i++)
+            //    {
+            //        newLevelList.Add(levelsList[i]);
+            //    }
+            //    levelsList.Clear();
+            //    levelsList.AddRange(newLevelList);
+            //}
+
             base.Update(gameTime);
+        }
+
+        private void ClearLevel()
+        {
+            DoorList.Clear();
+            SwitchList.Clear();
+            foodList.Clear();
+            player._Position = new Vector2(0, 0);
+            currentExit = null;
+            rectList.Clear();
+            player.SetPlayerSize(4);
         }
 
         private void SaveLevel()
@@ -385,7 +399,7 @@ namespace MGJ
             try
             {
 
-                nl.SaveLevel(DoorList, SwitchList, foodList, rectList, player._Position, currentExit._Position);
+                nl.SaveLevel(DoorList, SwitchList, foodList.FindAll(x=>x._CurrentState == Sprite.SpriteState.kStateActive), rectList, player._Position, new Vector2(2000,2000));
                 levelSaved = true;
 
                 levelsList.Add(nl);
@@ -406,13 +420,7 @@ namespace MGJ
                 Console.WriteLine("Error Saving.");
                 return;
             }
-
-            DoorList.Clear();
-            SwitchList.Clear();
-            foodList.Clear();
-            player._Position = new Vector2(0, 0);
-            currentExit = null;
-            rectList.Clear();
+            ClearLevel();
 
         }
 

@@ -115,6 +115,12 @@ namespace MGJ.GameObjects
 
         }
 
+        public void SetPlayerSize(int i)
+        {
+                this._Scale.X = 0.25f * i;
+                this._Scale.Y = 0.25f * i;
+                ChangeColor((Enums.SwitchColors)i);
+        }
 
         public void ChangeColor(Enums.SwitchColors color)
         {
